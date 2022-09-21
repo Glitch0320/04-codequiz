@@ -1,8 +1,24 @@
 var start = document.querySelector('#start');
 var timerEl = document.querySelector('#timer');
 var questionCard = document.querySelector('#question');
+var highscores = document.querySelector('#highscores');
+highscores.setAttribute('style', 'display: none;')
+var showScores = document.querySelector('#show-scores')
 var score = 0;
 var qIndex = 0;
+
+// get scores from local storage
+var scores = JSON.parse(localStorage.getItem('scores'));
+if (!scores) {
+    scores = {};
+}
+// add scores to highscores
+scoresArr = Object.entries(scores);
+for (let i = 0; i < scoresArr.length; i++) {
+    var scoreElement = document.createElement('span');
+    scoreElement.innerHTML = scoresArr[i][0] + ': ' + scoresArr[i][1];
+    highscores.appendChild(scoreElement);
+}
 
 class question {
     constructor(question, correct, answers) {
@@ -33,7 +49,8 @@ for (let i = 0; i < queueLen; i++) {
 
     // add div with id for each question
     var div = document.createElement('div');
-    div.setAttribute('id', i)
+    div.setAttribute('id', 'div-' + i);
+    div.setAttribute('style', 'display: none;');
     questionCard.appendChild(div);
 
     // add question
@@ -41,7 +58,7 @@ for (let i = 0; i < queueLen; i++) {
 
     var h2 = document.createElement('h2');
     h2.innerHTML = q.question;
-    div.appendChild(h2)
+    div.appendChild(h2);
 
     // add answers and correct in randomly
     var correctIndex = Math.floor(Math.random() * q.answers.length + 1);
@@ -52,11 +69,11 @@ for (let i = 0; i < queueLen; i++) {
         if (j === correctIndex) {
             h3 = document.createElement('h3');
             h3.innerHTML = q.correct;
-            questionCard.appendChild(h3);
+            div.append(h3);
         } else {
             p = document.createElement('p');
             p.innerHTML = q.answers[answerIndex];
-            questionCard.appendChild(p);
+            div.append(p);
             answerIndex++;
         }
 
@@ -68,29 +85,74 @@ for (let i = 0; i < queueLen; i++) {
 var totalTime = 10 * queueLen;
 timerEl.textContent = totalTime;
 
+
+
 function game() {
+
+    console.log(scores);
 
     var timer = setInterval( () => {
 
         totalTime--;
         timerEl.textContent = totalTime;
 
-        if (totalTime <= 0 || queue.length === 0) {
+        if (totalTime <= 0 || qIndex === queueLen) {
             clearInterval(timer);
             // Allow user to save score and initials
+            while (!initials) {
+                var initials = prompt('Enter Initials: ');
+            }
+            scores[initials] = score;
+            localStorage.setItem('scores', JSON.stringify(scores));
         }
     
     }, 1000);
 
-    // Show question until clicked
-
+    // Show first question
+    var thisQuestion = document.querySelector('#div-' + qIndex);
+    thisQuestion.style.display = 'block';
 
 }
 
-start.addEventListener('click', () => {
-    game();
-});
+
 
 questionCard.addEventListener('click', (e) => {
-    console.log(e.target.nodeName)
+    var thisQuestion = document.querySelector('#div-' + qIndex);
+    // If correct
+    if (e.target.nodeName === 'H3') {
+        score++;
+        thisQuestion.style.display = 'none';
+        // If there is a next question, display it
+        if (qIndex < queueLen) {
+            qIndex++;
+            thisQuestion = document.querySelector('#div-' + qIndex);
+            thisQuestion.style.display = 'block';
+        }
+    } else if (e.target.nodeName === 'P') {
+        totalTime -= 3;
+        thisQuestion.style.display = 'none';
+        // If there is a next question, display it
+        if (qIndex < queueLen) {
+            qIndex++;
+            thisQuestion = document.querySelector('#div-' + qIndex);
+            thisQuestion.style.display = 'block';
+        }
+    }
+});
+
+scoresShown = false;
+showScores.addEventListener('click', () => {
+    if (!scoresShown) {
+        // show scores 
+        scoresShown = true;
+        highscores.setAttribute('style', 'display: block;')
+    } else {
+        // hide scores
+        scoresShown = false;
+        highscores.setAttribute('style', 'display: none;')
+    }
+});
+
+start.addEventListener('click', () => {
+    game();
 });

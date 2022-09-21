@@ -99,8 +99,8 @@ function game() {
         if (totalTime <= 0 || qIndex === queueLen) {
             clearInterval(timer);
             // Allow user to save score and initials
-            while (!initials) {
-                var initials = prompt('Enter Initials: ');
+            while (initials.length != 2) {
+                var initials = prompt('Enter Initials: ').toUpperCase();
             }
             scores[initials] = score;
             localStorage.setItem('scores', JSON.stringify(scores));
@@ -123,8 +123,9 @@ questionCard.addEventListener('click', (e) => {
         score++;
         thisQuestion.style.display = 'none';
         // If there is a next question, display it
+        qIndex++;
         if (qIndex < queueLen) {
-            qIndex++;
+
             thisQuestion = document.querySelector('#div-' + qIndex);
             thisQuestion.style.display = 'block';
         }
@@ -132,8 +133,8 @@ questionCard.addEventListener('click', (e) => {
         totalTime -= 3;
         thisQuestion.style.display = 'none';
         // If there is a next question, display it
+        qIndex++;
         if (qIndex < queueLen) {
-            qIndex++;
             thisQuestion = document.querySelector('#div-' + qIndex);
             thisQuestion.style.display = 'block';
         }

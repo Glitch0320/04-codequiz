@@ -101,8 +101,11 @@ function validate() {
         alert('Please enter two letters');
         return false;
     } else {
+        form.style.display = 'none';
         scores[input] = score;
         localStorage.setItem('scores', JSON.stringify(scores));
+        score = 0;
+        qIndex = 0;
     }
 }
 

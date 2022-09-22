@@ -38,7 +38,9 @@ class question {
 let q1 = new question('What is javaScript?', 'An object oriented programming language used to interact with static web pages.', ['A language used to create coffee orders.', 'A secondary web programming language.']);
 let q2 = new question('What is the escape character than can be placed before special characters in order to include them in strings?', '\\', ['<', '*', '?']);
 let q3 = new question('JavaScript is case sensitive.', 'true', ['false']);
-var unshuffledQueue = [q1, q2, q3];
+let q4 = new question('What does JSON stand for?', 'JavaScript Object Notation', ['Jerry\'s sweaty old nutsack', 'JavaScript Oriented Naming']);
+let q5 = new question('What does JSON do?', 'Represents javaScript objects as strings', ['Help with naming of javaScript objects', 'It\'s like a css reset file for javaScript'])
+var unshuffledQueue = [q1, q2, q3, q4, q5];
 
 // shuffle questions
 var queue = [];

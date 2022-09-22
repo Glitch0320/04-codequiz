@@ -35,7 +35,7 @@ main {
     width: 100%;
 }
 
-h2 {
+div > h2 {
     font-size: larger;
     margin-top: 1rem;
 }
@@ -66,6 +66,18 @@ input {
     margin-top: 1rem;
 }
 
+button {
+    padding: .32rem;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: darkblue;
+    background-color: #2cff0f;
+}
+
+button:hover {
+    padding: .5rem;
+    background-color: #1fad0d;
+}
+
 #timer {
     font-size: x-large;
     color: red;
@@ -87,9 +99,11 @@ input {
 #highscores > span {
     width: 100%;
     text-align: center;
+    border: 1px dashed grey;
 }
 
 #show-scores {
     width: 30%;
     text-align: center;
+    border: 2px solid black;
 }

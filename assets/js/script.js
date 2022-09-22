@@ -116,7 +116,7 @@ function game() {
 
         gameOn = true;
 
-        console.log(scores);
+        questionCard.style.display = 'block';
 
         var timer = setInterval( () => {
 
@@ -127,6 +127,7 @@ function game() {
             if (totalTime <= 0 || qIndex === queueLen) {
                 gameOn = false;
                 clearInterval(timer);
+                questionCard.style.display = 'none';
                 // Allow user to save score and initials
                 form.style.display = 'block';
                 formShown = true;

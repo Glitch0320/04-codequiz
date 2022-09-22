@@ -35,9 +35,10 @@ class question {
 }
 
 // Questions and Answers
-let q1 = new question('What is the meaning of this?', 'correct', ['ans1', 'ans2']);
-let q2 = new question('What is the meaning of this2?', 'correct', ['2ans1', '2ans2']);
-var unshuffledQueue = [q1, q2];
+let q1 = new question('What is javaScript?', 'An object oriented programming language used to interact with static web pages.', ['A language used to create coffee orders.', 'A secondary web programming language.']);
+let q2 = new question('What is the escape character than can be placed before special characters in order to include them in strings?', '\\', ['<', '*', '?']);
+let q3 = new question('JavaScript is case sensitive.', 'true', ['false']);
+var unshuffledQueue = [q1, q2, q3];
 
 // shuffle questions
 var queue = [];

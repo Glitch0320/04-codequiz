@@ -1,3 +1,95 @@
 * {
     box-sizing: border-box;
 }
+
+.container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+h1 {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: xx-large;
+    color: #234099;
+    padding: .5rem;
+}
+
+.container > header {
+    width: 100%;
+    text-align: center;
+    padding: 1rem;
+    background-color: rgb(52, 0, 88);
+}
+
+main > header {
+    background-color: #234099;
+    width: 100%;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+h2 {
+    font-size: larger;
+    margin-top: 1rem;
+}
+
+p, h3 {
+    font-size: medium;
+    margin-top: 1rem;
+    border: 1px solid blue;
+    border-radius: 5px;
+    padding: .5rem;
+}
+
+p:hover, h3:hover {
+    background-color: rgb(0, 171, 233);
+}
+
+form {
+    display: none;
+    text-align: center;
+    padding: 0 1rem 0 1rem;
+}
+
+label {
+    width: 100%;
+}
+
+input {
+    margin-top: 1rem;
+}
+
+#timer {
+    font-size: x-large;
+    color: red;
+    text-align: center;
+}
+
+#question {
+    text-align: center;
+    margin: 0 1rem 0 1rem;
+}
+
+#highscores {
+    width: 30%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+#highscores > span {
+    width: 100%;
+    text-align: center;
+}
+
+#show-scores {
+    width: 30%;
+    text-align: center;
+}

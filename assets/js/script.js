@@ -2,10 +2,16 @@ var start = document.querySelector('#start');
 var timerEl = document.querySelector('#timer');
 var questionCard = document.querySelector('#question');
 var highscores = document.querySelector('#highscores');
-highscores.setAttribute('style', 'display: none;')
-var showScores = document.querySelector('#show-scores')
+highscores.setAttribute('style', 'display: none;');
+var showScores = document.querySelector('#show-scores');
+var initialsInput = document.forms['form']['initials'];
+var submit = document.querySelector('#submit')
+var form = document.forms['form'];
+var formShown = false;
 var score = 0;
 var qIndex = 0;
+gameOn = false;
+keys = 'QAZWSXEDCRFVTGBYHNUJMIKOLPqazwsxedcrfvtgbyhnujmikolp'
 
 // get scores from local storage
 var scores = JSON.parse(localStorage.getItem('scores'));
@@ -86,31 +92,50 @@ var totalTime = 10 * queueLen;
 timerEl.textContent = totalTime;
 
 
+function validate() {
+    let input = initialsInput.value;
+    // if input isn't equal to two letters
+    if (input.length != 2 || 
+        !keys.includes(input[0]) ||
+        !keys.includes(input[1]) ) {
+        alert('Please enter two letters');
+        return false;
+    } else {
+        scores[input] = score;
+        localStorage.setItem('scores', JSON.stringify(scores));
+    }
+}
+
 
 function game() {
 
-    console.log(scores);
+    if (!gameOn) {
 
-    var timer = setInterval( () => {
+        gameOn = true;
 
-        totalTime--;
-        timerEl.textContent = totalTime;
+        console.log(scores);
 
-        if (totalTime <= 0 || qIndex === queueLen) {
-            clearInterval(timer);
-            // Allow user to save score and initials
-            while (initials.length != 2) {
-                var initials = prompt('Enter Initials: ').toUpperCase();
+        var timer = setInterval( () => {
+
+            totalTime--;
+            timerEl.textContent = totalTime;
+
+            // Game ends here
+            if (totalTime <= 0 || qIndex === queueLen) {
+                gameOn = false;
+                clearInterval(timer);
+                // Allow user to save score and initials
+                form.style.display = 'block';
+                formShown = true;
             }
-            scores[initials] = score;
-            localStorage.setItem('scores', JSON.stringify(scores));
-        }
-    
-    }, 1000);
+        
+        }, 1000);
 
-    // Show first question
-    var thisQuestion = document.querySelector('#div-' + qIndex);
-    thisQuestion.style.display = 'block';
+        // Show first question
+        var thisQuestion = document.querySelector('#div-' + qIndex);
+        thisQuestion.style.display = 'block';
+
+    }
 
 }
 
@@ -146,7 +171,7 @@ showScores.addEventListener('click', () => {
     if (!scoresShown) {
         // show scores 
         scoresShown = true;
-        highscores.setAttribute('style', 'display: block;')
+        highscores.setAttribute('style', 'display: flex;')
     } else {
         // hide scores
         scoresShown = false;
@@ -156,4 +181,12 @@ showScores.addEventListener('click', () => {
 
 start.addEventListener('click', () => {
     game();
+});
+
+submit.addEventListener('click', () => {
+    formShown ? validate() : score += 0;
+});
+
+document.addEventListener('keydown', (e) => {
+    e.key === 'Enter' && formShown ? validate() : score +=0;
 });

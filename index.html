@@ -1,28 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./assets/css/reset.css" />
     <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Code Quiz</title>
 </head>
 <body>
+
     <div id="viewport" class="container">
+
         <header>
             <h1>Jonesey's javaScript</h1>
             <button type="button" id="start">Start Quiz</button>
-            <h2 id="show-scores">Show highscores:</h2>
-            <div id="highscores"></div>
         </header>
     
         <main>
+
+            <h2 id="show-scores">Show highscores</h2>
+            <div id="highscores"></div>
+
             <span id="timer"></span>
+
+            <form name="form">
+                <label for="initials"><h2>Save your Score</h2></label>
+                <input name="initials" type="text" placeholder="Enter initials" />
+                <button type="button" id="submit">Save</button>
+            </form>
+            
             <div id="question">
-                <!-- This is where each question will display -->
+                <!-- 
+                    <h2> Lorem ipsum delipsum? </h2>
+                    <p> Lorem ipsum. </p>
+                    <p> Lorem delipsum. </p>
+                    <h3> Pick me I am correct </h3>
+                 -->
             </div>
         </main>
+
     </div>
 
     <script src="./assets/js/script.js"></script>
